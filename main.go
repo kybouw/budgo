@@ -8,7 +8,7 @@ import (
 
 type BudgPlan map[string]map[string]float64
 
-func BudgTable(plan BudgPlan, amount float64) string {
+func (plan BudgPlan) CalculateTable(amount float64) string {
 	var ret string = ""
 	for groupName, groupValue := range plan {
 		ret += fmt.Sprintln(groupName)
@@ -27,5 +27,5 @@ func main() {
 	toml.DecodeFile("plan.toml", &plan)
 
 	var amount float64 = 1000
-	fmt.Print(BudgTable(plan, amount))
+	fmt.Print(plan.CalculateTable(amount))
 }
