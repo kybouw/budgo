@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/BurntSushi/toml"
 )
@@ -24,14 +23,8 @@ func BudgTable(plan BudgPlan, amount float64) string {
 }
 
 func main() {
-	planInputRaw, err := os.ReadFile("plan.toml")
-	if err != nil {
-		panic(err)
-	}
-	var planInput string = string(planInputRaw[:])
-
 	var plan BudgPlan
-	toml.Decode(planInput, &plan)
+	toml.DecodeFile("plan.toml", &plan)
 
 	var amount float64 = 1000
 	fmt.Print(BudgTable(plan, amount))
